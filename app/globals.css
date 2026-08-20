@@ -1,26 +1,80 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --paper: #faf6ef;
+  --surface: #fffdf9;
+  --ink: #2b221a;
+  --muted: #7d6c59;
+  --line: #e7dcc9;
+  --crust: #c1662f;
+  --crust-soft: #f4e6d6;
+  --leaven: #4f7a4a;
+  --shadow: 0 1px 2px rgb(43 34 26 / 0.05), 0 8px 24px -12px rgb(43 34 26 / 0.14);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --paper: #16120e;
+    --surface: #1e1913;
+    --ink: #f1e8db;
+    --muted: #a3917c;
+    --line: #302820;
+    --crust: #e8944f;
+    --crust-soft: #33261a;
+    --leaven: #8bbd7f;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px -12px rgb(0 0 0 / 0.6);
   }
 }
 
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-crust: var(--crust);
+  --color-crust-soft: var(--crust-soft);
+  --color-leaven: var(--leaven);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-fraunces);
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--paper);
+  color: var(--ink);
+  /* Faint speckle, like flour on the counter. */
+  background-image: radial-gradient(var(--line) 0.5px, transparent 0.5px);
+  background-size: 22px 22px;
+}
+
+.card {
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.field {
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  border-radius: 0.6rem;
+  padding: 0.55rem 0.7rem;
+  width: 100%;
+  font-size: 0.95rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.field:focus {
+  outline: none;
+  border-color: var(--crust);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--crust) 18%, transparent);
+}
+.field::placeholder { color: color-mix(in srgb, var(--muted) 70%, transparent); }
+
+.label {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
 }
